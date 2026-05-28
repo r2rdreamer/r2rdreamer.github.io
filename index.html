@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="R2RDreamer: 3D-aware Data Augmentation for Spatially-generalized 2D Manipulation Policies">
+  <meta name="keywords" content="Robot Learning, Demonstration Augmentation, Video Completion, Spatial Generalization, Robotic Manipulation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R2RDreamer</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/r2rdreamer.css">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+<section class="hero publication-header">
+  <div class="hero-body">
+    <div class="container is-fullhd">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title dreamer-title">
+            R2RDreamer: 3D-aware Data Augmentation<br class="is-hidden-mobile">
+            for Spatially-generalized 2D Manipulation Policies
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Anonymous Authors</span>
+          </div>
+          <div class="is-size-6 publication-venue">CoRL 2026 Submission</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dreamer-section">
+  <div class="container is-max-widescreen">
+    <hr>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-title">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Spatial generalization is critical for imitation-learned manipulation policies, but collecting demonstrations across diverse object poses, robot configurations, and camera viewpoints is expensive. R2RDreamer is a real-to-real demonstration augmentation framework that preserves the geometric consistency of 3D action-observation editing while moving visual completion to 2D video space. It first edits incomplete object pointclouds and end-effector trajectories in a shared 3D frame, then projects the edited scene into masked image-space control videos with occlusion-aware reasoning. A dense-control image-to-video model completes temporally coherent RGB observations, producing augmented RGB-action data for compact 2D visuomotor policies and VLA-style policies.
+          </p>
+        </div>
+        <figure class="paper-figure-placeholder" aria-label="R2RDreamer pipeline placeholder">
+          <div class="paper-figure-box">
+            <span class="placeholder-kicker">PNG Placeholder</span>
+            <span class="placeholder-title"><code>img/r2rdreamer_pipeline.png</code></span>
+          </div>
+          <figcaption>
+            Demonstration augmentation pipeline: 3D observation-action co-editing, occlusion-aware projection, and dense-control video completion.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dreamer-section">
+  <div class="container is-max-widescreen">
+    <hr>
+    <div class="rows is-centered has-text-centered">
+      <h2 class="title is-3 section-title">Method</h2>
+      <p class="content has-text-justified section-copy">
+        R2RDreamer keeps 3D where it is necessary for action consistency, but does not require the edited 3D scene to be a complete policy-ready observation. Incomplete geometry becomes a dense spatial control for video completion, shifting the visual-repair bottleneck from task-specific 3D reconstruction to scalable 2D video modeling.
+      </p>
+      <div class="method-figures">
+        <figure class="paper-figure-placeholder" aria-label="Pipeline figure placeholder">
+          <div class="paper-figure-box paper-figure-box-wide">
+            <span class="placeholder-kicker">PNG Placeholder</span>
+            <span class="placeholder-title"><code>img/r2rdreamer_pipeline.png</code></span>
+          </div>
+          <figcaption>
+            Source demonstrations are segmented and tracked, co-edited with actions in 3D, projected into masked 2D controls, and completed into RGB observations.
+          </figcaption>
+        </figure>
+        <figure class="paper-figure-placeholder" aria-label="Video completion model placeholder">
+          <div class="paper-figure-box paper-figure-box-wide">
+            <span class="placeholder-kicker">PNG Placeholder</span>
+            <span class="placeholder-title"><code>img/video_completion_model.png</code></span>
+          </div>
+          <figcaption>
+            Projection-controlled video completion uses the masked control video, optional reference image, and language instruction to synthesize completed RGB frames.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dreamer-section">
+  <div class="container is-max-widescreen">
+    <hr>
+    <div class="rows is-centered has-text-centered">
+      <h2 class="title is-3 section-title">Qualitative Augmentation Cases</h2>
+      <p class="case-intro">
+        Select a case to compare the source demonstration, the edited 3D pointcloud control, and the completed augmented video.
+      </p>
+
+      <div class="case-switcher" role="tablist" aria-label="Augmentation cases">
+        <button class="case-button is-active" type="button" role="tab" aria-selected="true" aria-controls="case-1" data-case-target="case-1">Case 1</button>
+        <button class="case-button" type="button" role="tab" aria-selected="false" aria-controls="case-2" data-case-target="case-2">Case 2</button>
+        <button class="case-button" type="button" role="tab" aria-selected="false" aria-controls="case-3" data-case-target="case-3">Case 3</button>
+        <button class="case-button" type="button" role="tab" aria-selected="false" aria-controls="case-4" data-case-target="case-4">Case 4</button>
+      </div>
+
+      <div class="case-panels">
+        <div class="case-panel is-active" id="case-1" role="tabpanel">
+          <div class="video-triplet" aria-label="Case 1 videos">
+            <article class="video-card">
+              <h3>Original</h3>
+              <div class="video-slot" data-video-src="videos/case_01_original.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_01_original.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_01_original.mp4</code></p>
+                </div>
+              </div>
+            </article>
+            <article class="video-card">
+              <h3>3D Pointcloud Control</h3>
+              <div class="video-slot" data-video-src="videos/case_01_pointcloud.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_01_pointcloud.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_01_pointcloud.mp4</code></p>
+                </div>
+              </div>
+            </article>
+            <article class="video-card">
+              <h3>Completed Augmentation</h3>
+              <div class="video-slot" data-video-src="videos/case_01_augmented.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_01_augmented.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_01_augmented.mp4</code></p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="case-panel" id="case-2" role="tabpanel" hidden>
+          <div class="video-triplet" aria-label="Case 2 videos">
+            <article class="video-card">
+              <h3>Original</h3>
+              <div class="video-slot" data-video-src="videos/case_02_original.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_02_original.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_02_original.mp4</code></p>
+                </div>
+              </div>
+            </article>
+            <article class="video-card">
+              <h3>3D Pointcloud Control</h3>
+              <div class="video-slot" data-video-src="videos/case_02_pointcloud.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_02_pointcloud.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_02_pointcloud.mp4</code></p>
+                </div>
+              </div>
+            </article>
+            <article class="video-card">
+              <h3>Completed Augmentation</h3>
+              <div class="video-slot" data-video-src="videos/case_02_augmented.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_02_augmented.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_02_augmented.mp4</code></p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="case-panel" id="case-3" role="tabpanel" hidden>
+          <div class="video-triplet" aria-label="Case 3 videos">
+            <article class="video-card">
+              <h3>Original</h3>
+              <div class="video-slot" data-video-src="videos/case_03_original.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_03_original.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_03_original.mp4</code></p>
+                </div>
+              </div>
+            </article>
+            <article class="video-card">
+              <h3>3D Pointcloud Control</h3>
+              <div class="video-slot" data-video-src="videos/case_03_pointcloud.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_03_pointcloud.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_03_pointcloud.mp4</code></p>
+                </div>
+              </div>
+            </article>
+            <article class="video-card">
+              <h3>Completed Augmentation</h3>
+              <div class="video-slot" data-video-src="videos/case_03_augmented.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_03_augmented.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_03_augmented.mp4</code></p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="case-panel" id="case-4" role="tabpanel" hidden>
+          <div class="video-triplet" aria-label="Case 4 videos">
+            <article class="video-card">
+              <h3>Original</h3>
+              <div class="video-slot" data-video-src="videos/case_04_original.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_04_original.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_04_original.mp4</code></p>
+                </div>
+              </div>
+            </article>
+            <article class="video-card">
+              <h3>3D Pointcloud Control</h3>
+              <div class="video-slot" data-video-src="videos/case_04_pointcloud.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_04_pointcloud.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_04_pointcloud.mp4</code></p>
+                </div>
+              </div>
+            </article>
+            <article class="video-card">
+              <h3>Completed Augmentation</h3>
+              <div class="video-slot" data-video-src="videos/case_04_augmented.mp4">
+                <video muted loop playsinline controls preload="metadata">
+                  <source src="videos/case_04_augmented.mp4" type="video/mp4">
+                </video>
+                <div class="video-fallback">
+                  <p class="placeholder-kicker">Video Placeholder</p>
+                  <p class="placeholder-title"><code>videos/case_04_augmented.mp4</code></p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <p class="content has-text-justified section-copy">
+        The three videos expose the full augmentation path: the original real demonstration, the geometry-aware control produced after 3D co-editing and projection, and the completed RGB video used as policy training data.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer dreamer-footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>Project page scaffold for R2RDreamer. Replace placeholder links and videos as final assets become available.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-case-target]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetId = button.dataset.caseTarget;
+
+      document.querySelectorAll('[data-case-target]').forEach((item) => {
+        const isSelected = item === button;
+        item.classList.toggle('is-active', isSelected);
+        item.setAttribute('aria-selected', String(isSelected));
+      });
+
+      document.querySelectorAll('.case-panel').forEach((panel) => {
+        const isSelected = panel.id === targetId;
+        panel.classList.toggle('is-active', isSelected);
+        panel.hidden = !isSelected;
+      });
+    });
+  });
+
+  document.querySelectorAll('.video-slot video').forEach((video) => {
+    const slot = video.closest('.video-slot');
+    const showFallback = () => slot.classList.add('is-missing');
+    const showVideo = () => slot.classList.remove('is-missing');
+
+    video.addEventListener('loadeddata', showVideo);
+    video.addEventListener('error', showFallback);
+    video.querySelectorAll('source').forEach((source) => {
+      source.addEventListener('error', showFallback);
+    });
+  });
+</script>
+</body>
+</html>
