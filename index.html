@@ -58,7 +58,7 @@
             <span class="placeholder-title"><code>img/r2rdreamer_pipeline.png</code></span>
           </div>
           <figcaption>
-            Demonstration augmentation pipeline: 3D observation-action co-editing, occlusion-aware projection, and dense-control video completion.
+            R2RDreamer pipeline. Source RGB-D demonstrations are segmented and tracked, co-edited with actions in 3D, projected into masked 2D control videos, and completed into RGB observations for policy training.
           </figcaption>
         </figure>
       </div>
@@ -81,7 +81,7 @@
             <span class="placeholder-title"><code>img/r2rdreamer_pipeline.png</code></span>
           </div>
           <figcaption>
-            Source demonstrations are segmented and tracked, co-edited with actions in 3D, projected into masked 2D controls, and completed into RGB observations.
+            Demonstration augmentation and self-supervised completion data. R2RDreamer augments source demonstrations through 3D co-editing and occlusion-aware projection, while projection-consistent and random object-drop masks provide training pairs for video completion.
           </figcaption>
         </figure>
         <figure class="paper-figure-placeholder" aria-label="Video completion model placeholder">
@@ -90,7 +90,7 @@
             <span class="placeholder-title"><code>img/video_completion_model.png</code></span>
           </div>
           <figcaption>
-            Projection-controlled video completion uses the masked control video, optional reference image, and language instruction to synthesize completed RGB frames.
+            Projection-controlled video completion model. The model conditions on a masked projected control video, optional reference image, and language instruction to complete temporally coherent RGB frames.
           </figcaption>
         </figure>
       </div>
